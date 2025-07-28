@@ -1,10 +1,10 @@
 body{
-    font-family: "Quicksand", sans-serif;
+    font-family: "Syncopate", sans-serif;
 }
 
 body a {
     text-decoration: none;
-    color: #333;
+    color: #333
 }
 
 /* === Base header styles for all pages === */
@@ -20,7 +20,6 @@ body a {
     font-size: 1.5rem;
     font-weight: bold;
     margin-left: 100px;
-    font-family: "Reenie Beanie", cursive;
 }
 
 .menu {
