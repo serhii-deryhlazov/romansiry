@@ -5,23 +5,31 @@
 
     // Helpers
     function getContext($folderPath) {
-    $txtFiles = glob($folderPath . '/*.txt');
-    if (count($txtFiles) === 1) {
-        $txtFile = $txtFiles[0];
-        return [
-            'title' => pathinfo($txtFile, PATHINFO_FILENAME),
-            'description' => file_get_contents($txtFile)
-        ];
-    }
-    return ['title' => 'Untitled Work', 'description' => ''];
+        $txtFiles = glob($folderPath . '/*.txt');
+        if (count($txtFiles) === 1) {
+            $txtFile = $txtFiles[0];
+            return [
+                'title' => pathinfo($txtFile, PATHINFO_FILENAME),
+                'description' => file_get_contents($txtFile)
+            ];
+        }
+        return ['title' => 'Untitled Work', 'description' => ''];
     }
 
     function getImageList($folderPath) {
-    $images = glob($folderPath . '/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
-    usort($images, function ($a, $b) {
-        return strnatcmp(basename($a), basename($b));
-    });
-    return $images;
+        $images = glob($folderPath . '/*.{jpg,jpeg,png,gif,webp}', GLOB_BRACE);
+
+        // Exclude images containing _medium or _tiny
+        $images = array_filter($images, function ($path) {
+            $filename = basename($path);
+            return !str_contains($filename, '_medium') && !str_contains($filename, '_tiny');
+        });
+
+        usort($images, function ($a, $b) {
+            return strnatcmp(basename($a), basename($b));
+        });
+
+        return array_values($images); // Re-index the array
     }
 
     // Extract workId
@@ -30,11 +38,11 @@
     $context = ['title' => '', 'description' => ''];
 
     if ($workId) {
-    $folderPath = realpath("$baseDir/$workId");
-    if ($folderPath && strpos($folderPath, realpath($baseDir)) === 0 && is_dir($folderPath)) {
-        $images = getImageList($folderPath);
-        $context = getContext($folderPath);
-    }
+        $folderPath = realpath("$baseDir/$workId");
+        if ($folderPath && strpos($folderPath, realpath($baseDir)) === 0 && is_dir($folderPath)) {
+            $images = getImageList($folderPath);
+            $context = getContext($folderPath);
+        }
     }
 ?>
 
