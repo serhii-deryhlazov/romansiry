@@ -42,16 +42,21 @@ body a {
     font-weight: bold;
 }
 
+
+
 .main-container {
     height: 90vh;
+    filter: blur(16px);
     background-repeat: no-repeat;
+    transition: background-image 0.8s ease, filter 0.8s ease, transform 0.8s ease;
 }
 
-.main-container .description {
+.description {
     width: fit-content;
     padding: 10px 20px;
     position: absolute;
     background-color: #fefefe;
     color: #212121;
     box-shadow: 1px 1px 5px #2121211a;
+    z-index: 9;
 }
