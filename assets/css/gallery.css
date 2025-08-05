@@ -22,4 +22,5 @@ body {
   height: auto;
   display: block;
   object-fit: cover;
+  filter: blur(16px);
 }

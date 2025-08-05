@@ -20,10 +20,15 @@
             $folderName = basename($folderPath);
             $firstImage = getFirstImage($folderPath);
 
+            $firstImageTiny = preg_replace('/\.(\w+)$/', '_tiny.$1', $firstImage);
+            $firstImageMedium = preg_replace('/\.(\w+)$/', '_medium.$1', $firstImage);
+
             if ($firstImage) {
                 $items[] = [
                     'workId' => $folderName,
-                    'src' => "$webBase/$folderName/$firstImage"
+                    'src' => "$webBase/$folderName/$firstImage",
+                    'srcTiny' => "$webBase/$folderName/$firstImageTiny",
+                    'srcMedium' => "$webBase/$folderName/$firstImageMedium"
                 ];
             }
         }
@@ -34,11 +39,21 @@
         <?php foreach ($items as $item): ?>
             <div class="gallery-item" >
                 <a href="?page=work&workId=<?= htmlspecialchars($item['workId']) ?>">
-                    <img src="<?= htmlspecialchars($item['src']) ?>" alt="Gallery <?= htmlspecialchars($item['workId']) ?>" />
+                    <img id="work<?= htmlspecialchars($item['workId']) ?>" src="<?= htmlspecialchars($item['srcTiny']) ?>" alt="Gallery <?= htmlspecialchars($item['workId']) ?>" />
                 </a>
             </div>
+            <script>
+                new ProgressiveImageLoader(
+                    'work<?= htmlspecialchars($item['workId']) ?>',
+                    [
+                        '<?= htmlspecialchars($item['srcMedium']) ?>',
+                        '<?= htmlspecialchars($item['src']) ?>'
+                    ]
+                );
+            </script>
         <?php endforeach; ?>
     <?php else: ?>
         <p>No images found.</p>
     <?php endif; ?>
 </main>
+

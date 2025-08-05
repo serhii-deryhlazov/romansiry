@@ -22,6 +22,7 @@
 ?>
 
 <body>
+    <script src="./assets/js/main.js"></script>
 
     <header>
         <nav class="header-nav">
@@ -52,7 +53,7 @@
 
     ?>
 
-    <script src="./assets/js/main.js"></script>
+    
 </body>
 
 </html>
