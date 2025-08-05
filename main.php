@@ -135,7 +135,7 @@
 <style>
     .main-container {
         background-image: url('<?= htmlspecialchars($tinyThumbWeb) ?>');
-        background-position: <?= mt_rand(10, 90) ?>% <?= mt_rand(10, 90) ?>%;
+        background-position: <?= mt_rand(25, 90) ?>% <?= mt_rand(10, 90) ?>%;
         background-size: <?= mt_rand(45, 69) ?>%;
     }
 
