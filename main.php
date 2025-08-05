@@ -145,10 +145,14 @@
     }
 </style>
 
-<div class="description">
-    <h2><?= htmlspecialchars($title) ?></h2>
-    <p><?= nl2br(htmlspecialchars($description)) ?></p>
-</div>
+
+<a href="?page=work&workId=<?= basename($randomFolderPath) ?>" class="main-link">
+    <div class="description">
+        <h2><?= htmlspecialchars($title) ?></h2>
+        <p><?= nl2br(htmlspecialchars($description)) ?></p>
+    </div>
+</a>
+
 <main class="main-container" id="mainContainer">
 </main>
 
